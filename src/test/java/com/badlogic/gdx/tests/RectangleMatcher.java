@@ -38,7 +38,7 @@ public class RectangleMatcher extends BaseMatcher<Rectangle> {
 
 	@Override
 	public void describeTo(Description description) {
-		
+		description.appendValue(rectangle);
 	}
 	
 	public static RectangleMatcher isEqualRectangle(Rectangle rectangle) {

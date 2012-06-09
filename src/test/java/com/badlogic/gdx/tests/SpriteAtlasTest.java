@@ -119,7 +119,7 @@ public class SpriteAtlasTest {
 		AtlasSprite sprite = new AtlasSprite(region);
 		sprite.setPosition(50f, 70f);
 		sprite.setOrigin(65f, 85f);
-		assertThat(sprite.getBoundingRectangle(), RectangleMatcher.isEqualRectangle(new Rectangle(50f, 70f, 200f, 64f)));
+		assertThat(sprite.getBoundingRectangle(), RectangleMatcher.isEqualRectangle(new Rectangle(50f + 10, 70f + 15, 181f, 42f)));
 	}
 	
 	@Test
@@ -129,7 +129,7 @@ public class SpriteAtlasTest {
 		sprite.setPosition(50f, 70f);
 		sprite.setOrigin(65f, 85f);
 		sprite.flip(true, false);
-		assertThat(sprite.getBoundingRectangle(), RectangleMatcher.isEqualRectangle(new Rectangle(50f, 70f, 200f, 64f)));
+		assertThat(sprite.getBoundingRectangle(), RectangleMatcher.isEqualRectangle(new Rectangle(50f + 10, 70f + 15, 181f, 42f)));
 	}
 	
 }
