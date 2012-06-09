@@ -132,4 +132,14 @@ public class SpriteAtlasTest {
 		assertThat(sprite.getBoundingRectangle(), RectangleMatcher.isEqualRectangle(new Rectangle(50f + 10, 70f + 15, 181f, 42f)));
 	}
 	
+	@Test
+	public void bugBoundingRectangleShouldNotChangeWhenFlippingVertically() {
+		AtlasRegion region = AtlasRegionFactory.atlasRegion(texture128x512, 2, 97, 181, 42, 200, 64, 10, 15, false);
+		AtlasSprite sprite = new AtlasSprite(region);
+		sprite.setPosition(50f, 70f);
+		sprite.setOrigin(65f, 85f);
+		sprite.flip(false, true);
+		assertThat(sprite.getBoundingRectangle(), RectangleMatcher.isEqualRectangle(new Rectangle(50f + 10, 70f + 15, 181f, 42f)));
+	}
+	
 }
