@@ -13,7 +13,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasSprite;
 import com.badlogic.gdx.math.Rectangle;
 
-public class SpriteAtlasFlipTest {
+public class SpriteAtlasTest {
 
 	private Texture texture128x512;
 
@@ -93,6 +93,24 @@ public class SpriteAtlasFlipTest {
 		assertThat(sprite.getY(), IsEqual.equalTo(70f));
 		assertThat(sprite.getOriginX(), IsEqual.equalTo(65f));
 		assertThat(sprite.getOriginY(), IsEqual.equalTo(85f));
+	}
+	
+	@Test
+	public void shouldReturnBoundingRectangleForAllTheSpriteIfNoWhitespaceRemoved() {
+		AtlasRegion region = AtlasRegionFactory.atlasRegion(texture128x512, 2, 97, 200, 64, 200, 64, 0, 0, false);
+		AtlasSprite sprite = new AtlasSprite(region);
+		sprite.setPosition(50f, 70f);
+		sprite.setOrigin(65f, 85f);
+		assertThat(sprite.getBoundingRectangle(), RectangleMatcher.isEqualRectangle(new Rectangle(50f, 70f, 200f, 64f)));
+	}
+	
+	@Test
+	public void shouldReturnBoundingRectangleForAllTheSpriteIfNoWhitespaceRemovedButRotated() {
+		AtlasRegion region = AtlasRegionFactory.atlasRegion(texture128x512, 2, 97, 64, 200, 200, 64, 0, 0, true);
+		AtlasSprite sprite = new AtlasSprite(region);
+		sprite.setPosition(50f, 70f);
+		sprite.setOrigin(65f, 85f);
+		assertThat(sprite.getBoundingRectangle(), RectangleMatcher.isEqualRectangle(new Rectangle(50f, 70f, 200f, 64f)));
 	}
 	
 	@Test
