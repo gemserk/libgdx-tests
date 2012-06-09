@@ -96,7 +96,7 @@ public class SpriteAtlasFlipTest {
 	}
 	
 	@Test
-	public void shouldReturnBoundingRectangleFromOriginalSprite() {
+	public void shouldReturnBoundingRectangleForAllTheSprite() {
 		AtlasRegion region = AtlasRegionFactory.atlasRegion(texture128x512, 2, 97, 181, 42, 200, 64, 10, 15, false);
 		AtlasSprite sprite = new AtlasSprite(region);
 		sprite.setPosition(50f, 70f);
