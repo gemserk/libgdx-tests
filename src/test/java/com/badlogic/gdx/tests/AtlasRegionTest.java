@@ -70,4 +70,16 @@ public class AtlasRegionTest {
 		assertThat(atlasRegion.offsetY, IsEqual.equalTo(-15f));
 	}
 	
+	@Test
+	public void shouldAllowMultipleFlips() {
+		AtlasRegion atlasRegion = AtlasRegionFactory.atlasRegion(texture128x512, 10, 15, 30, 45, 30, 45, 10, 15);
+		atlasRegion.flip(true, false);
+		assertThat(atlasRegion.offsetX, IsEqual.equalTo(-10f));
+		atlasRegion.flip(true, false);
+		assertThat(atlasRegion.offsetX, IsEqual.equalTo(10f));
+		atlasRegion.flip(true, false);
+		assertThat(atlasRegion.offsetX, IsEqual.equalTo(-10f));
+	}
+	
+	
 }

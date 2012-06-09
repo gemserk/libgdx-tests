@@ -24,6 +24,18 @@ public class SpriteTest {
 		expect(texture128x512.getHeight()).andReturn(512).anyTimes();
 		replay(texture128x512);
 	}
+	
+	@Test
+	public void shouldReturnBoundingRectangleWithSamePositionAndWidth() {
+		Sprite sprite = new Sprite(new TextureRegion(texture128x512, 0, 0, 128, 512));
+		sprite.setPosition(50f, 70f);
+		sprite.setOrigin(65f, 85f);
+		assertThat(sprite.getX(), IsEqual.equalTo(50f));
+		assertThat(sprite.getY(), IsEqual.equalTo(70f));
+		assertThat(sprite.getOriginX(), IsEqual.equalTo(65f));
+		assertThat(sprite.getOriginY(), IsEqual.equalTo(85f));
+		assertThat(sprite.getBoundingRectangle(), RectangleMatcher.isEqualRectangle(new Rectangle(50f, 70f, 128f, 512f)));
+	}
 
 	@Test
 	public void shouldReturnSamePositionWhenFlippedHorizontally() {

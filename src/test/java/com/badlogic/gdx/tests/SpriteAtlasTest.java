@@ -123,23 +123,23 @@ public class SpriteAtlasTest {
 	}
 	
 	@Test
-	public void bugBoundingRectangleShouldNotChangeWhenFlippingHorizontally() {
+	public void bugBoundingRectangleShouldNotChangeWhenFlippingHorizontallyWithOriginAtPosition() {
 		AtlasRegion region = AtlasRegionFactory.atlasRegion(texture128x512, 2, 97, 181, 42, 200, 64, 10, 15, false);
 		AtlasSprite sprite = new AtlasSprite(region);
 		sprite.setPosition(50f, 70f);
-		sprite.setOrigin(65f, 85f);
+		sprite.setOrigin(50f, 70f);
 		sprite.flip(true, false);
 		assertThat(sprite.getBoundingRectangle(), RectangleMatcher.isEqualRectangle(new Rectangle(50f + 10, 70f + 15, 181f, 42f)));
 	}
 	
 	@Test
-	public void bugBoundingRectangleShouldNotChangeWhenFlippingVertically() {
+	public void bugBoundingRectangleShouldNotChangeWhenFlippingVerticallyWithOriginAtPosition() {
 		AtlasRegion region = AtlasRegionFactory.atlasRegion(texture128x512, 2, 97, 181, 42, 200, 64, 10, 15, false);
 		AtlasSprite sprite = new AtlasSprite(region);
-		sprite.setPosition(50f, 70f);
-		sprite.setOrigin(65f, 85f);
+		sprite.setPosition(200f, 200f);
+		sprite.setOrigin(200f, 200f);
 		sprite.flip(false, true);
-		assertThat(sprite.getBoundingRectangle(), RectangleMatcher.isEqualRectangle(new Rectangle(50f + 10, 70f + 15, 181f, 42f)));
+		assertThat(sprite.getBoundingRectangle(), RectangleMatcher.isEqualRectangle(new Rectangle(200f + 10, 200f + 15, 181f, 42f)));
 	}
 	
 }
