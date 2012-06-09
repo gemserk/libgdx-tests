@@ -53,12 +53,7 @@ public class SpriteAtlasFlipTest {
 
 	@Test
 	public void shouldReturnSizeWhenWhiteSpaceNoRotation() {
-		AtlasRegion region = new AtlasRegion(texture128x512, 2, 97, 181, 42);
-
-		region.originalWidth = 200;
-		region.originalHeight = 64;
-		region.offsetX = 10;
-		region.offsetY = 15;
+		AtlasRegion region = atlasRegion(texture128x512, 2, 97, 181, 42, 200, 64, 10, 15);
 
 		AtlasSprite atlasSprite = new AtlasSprite(region);
 
@@ -85,12 +80,7 @@ public class SpriteAtlasFlipTest {
 
 	@Test
 	public void shouldReturnSamePositionWhenFlippedHorizontally() {
-		AtlasRegion region = new AtlasRegion(texture128x512, 2, 97, 181, 42);
-
-		region.originalWidth = 200;
-		region.originalHeight = 64;
-		region.offsetX = 10;
-		region.offsetY = 15;
+		AtlasRegion region = atlasRegion(texture128x512, 2, 97, 181, 42, 200, 64, 10, 15);
 
 		AtlasSprite sprite = new AtlasSprite(region);
 		
@@ -101,17 +91,11 @@ public class SpriteAtlasFlipTest {
 		assertThat(sprite.getY(), IsEqual.equalTo(70f));
 		assertThat(sprite.getOriginX(), IsEqual.equalTo(65f));
 		assertThat(sprite.getOriginY(), IsEqual.equalTo(85f));
-		assertThat(sprite.getBoundingRectangle(), RectangleMatcher.isEqualRectangle(new Rectangle(50f, 70f, 200f, 64f)));
 	}
 
 	@Test
 	public void shouldReturnSamePositionWhenFlippedVertically() {
-		AtlasRegion region = new AtlasRegion(texture128x512, 2, 97, 181, 42);
-
-		region.originalWidth = 200;
-		region.originalHeight = 64;
-		region.offsetX = 10;
-		region.offsetY = 15;
+		AtlasRegion region = atlasRegion(texture128x512, 2, 97, 181, 42, 200, 64, 10, 15);
 
 		AtlasSprite sprite = new AtlasSprite(region);
 		
@@ -122,6 +106,29 @@ public class SpriteAtlasFlipTest {
 		assertThat(sprite.getY(), IsEqual.equalTo(70f));
 		assertThat(sprite.getOriginX(), IsEqual.equalTo(65f));
 		assertThat(sprite.getOriginY(), IsEqual.equalTo(85f));
+	}
+	
+	@Test
+	public void bugBoundingRectangleShouldNotChangeWhenFlippingHorizontally() {
+		AtlasRegion region = atlasRegion(texture128x512, 2, 97, 181, 42, 200, 64, 10, 15);
+		AtlasSprite sprite = new AtlasSprite(region);
+		sprite.setPosition(50f, 70f);
+		sprite.setOrigin(65f, 85f);
+		sprite.flip(true, false);
 		assertThat(sprite.getBoundingRectangle(), RectangleMatcher.isEqualRectangle(new Rectangle(50f, 70f, 200f, 64f)));
+	}
+
+	public AtlasRegion atlasRegion(Texture texture, int x, int y, int width, int height, int originalWidth, int originalHeight, int offsetX, int offsetY) {
+		return atlasRegion(texture, x, y, width, height, originalWidth, originalHeight, offsetX, offsetY, false);
+	}
+	
+	public AtlasRegion atlasRegion(Texture texture, int x, int y, int width, int height, int originalWidth, int originalHeight, int offsetX, int offsetY, boolean rotate) {
+		AtlasRegion region = new AtlasRegion(texture, x, y, width, height);
+		region.originalWidth = originalWidth;
+		region.originalHeight = originalHeight;
+		region.offsetX = offsetX;
+		region.offsetY = offsetY;
+		region.rotate = rotate;
+		return region;
 	}
 }
