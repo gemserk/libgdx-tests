@@ -24,7 +24,7 @@ public class SpriteAtlasTest {
 		expect(texture128x512.getHeight()).andReturn(512).anyTimes();
 		replay(texture128x512);
 	}
-	
+
 	@Test
 	public void shouldHaveSizeBasedOnOriginalSize() {
 		AtlasRegion region = AtlasRegionFactory.atlasRegion(texture128x512, 0, 0, 100, 120, 100, 120, 0, 0);
@@ -70,7 +70,7 @@ public class SpriteAtlasTest {
 		AtlasRegion region = AtlasRegionFactory.atlasRegion(texture128x512, 2, 97, 181, 42, 200, 64, 10, 15, false);
 
 		AtlasSprite sprite = new AtlasSprite(region);
-		
+
 		sprite.setPosition(50f, 70f);
 		sprite.setOrigin(65f, 85f);
 		sprite.flip(true, false);
@@ -85,7 +85,7 @@ public class SpriteAtlasTest {
 		AtlasRegion region = AtlasRegionFactory.atlasRegion(texture128x512, 2, 97, 181, 42, 200, 64, 10, 15, false);
 
 		AtlasSprite sprite = new AtlasSprite(region);
-		
+
 		sprite.setPosition(50f, 70f);
 		sprite.setOrigin(65f, 85f);
 		sprite.flip(false, true);
@@ -94,7 +94,7 @@ public class SpriteAtlasTest {
 		assertThat(sprite.getOriginX(), IsEqual.equalTo(65f));
 		assertThat(sprite.getOriginY(), IsEqual.equalTo(85f));
 	}
-	
+
 	@Test
 	public void shouldReturnBoundingRectangleForAllTheSpriteIfNoWhitespaceRemoved() {
 		AtlasRegion region = AtlasRegionFactory.atlasRegion(texture128x512, 2, 97, 200, 64, 200, 64, 0, 0, false);
@@ -103,7 +103,7 @@ public class SpriteAtlasTest {
 		sprite.setOrigin(65f, 85f);
 		assertThat(sprite.getBoundingRectangle(), RectangleMatcher.isEqualRectangle(new Rectangle(50f, 70f, 200f, 64f)));
 	}
-	
+
 	@Test
 	public void shouldReturnBoundingRectangleForAllTheSpriteIfNoWhitespaceRemovedButRotated() {
 		AtlasRegion region = AtlasRegionFactory.atlasRegion(texture128x512, 2, 97, 64, 200, 200, 64, 0, 0, true);
@@ -112,7 +112,7 @@ public class SpriteAtlasTest {
 		sprite.setOrigin(65f, 85f);
 		assertThat(sprite.getBoundingRectangle(), RectangleMatcher.isEqualRectangle(new Rectangle(50f, 70f, 200f, 64f)));
 	}
-	
+
 	@Test
 	public void shouldReturnBoundingRectangleForAllTheSprite() {
 		AtlasRegion region = AtlasRegionFactory.atlasRegion(texture128x512, 2, 97, 181, 42, 200, 64, 10, 15, false);
@@ -121,7 +121,7 @@ public class SpriteAtlasTest {
 		sprite.setOrigin(65f, 85f);
 		assertThat(sprite.getBoundingRectangle(), RectangleMatcher.isEqualRectangle(new Rectangle(50f + 10, 70f + 15, 181f, 42f)));
 	}
-	
+
 	@Test
 	public void bugBoundingRectangleShouldNotChangeWhenFlippingHorizontallyWithOriginAtPosition() {
 		AtlasRegion region = AtlasRegionFactory.atlasRegion(texture128x512, 2, 97, 181, 42, 200, 64, 10, 15, false);
@@ -131,7 +131,7 @@ public class SpriteAtlasTest {
 		sprite.flip(true, false);
 		assertThat(sprite.getBoundingRectangle(), RectangleMatcher.isEqualRectangle(new Rectangle(50 + 200 - 181 - 10, 70f + 15, 181f, 42f)));
 	}
-	
+
 	@Test
 	public void bugBoundingRectangleShouldNotChangeWhenFlippingVerticallyWithOriginAtPosition() {
 		AtlasRegion region = AtlasRegionFactory.atlasRegion(texture128x512, 2, 97, 181, 42, 200, 64, 10, 15, false);
@@ -141,5 +141,27 @@ public class SpriteAtlasTest {
 		sprite.flip(false, true);
 		assertThat(sprite.getBoundingRectangle(), RectangleMatcher.isEqualRectangle(new Rectangle(200f + 10, 200 + 64 - 42 - 15, 181f, 42f)));
 	}
+
+	@Test
+	public void shouldSetSizeOfNormalSpriteAtlas() {
+		AtlasRegion region = AtlasRegionFactory.atlasRegion(texture128x512, 2, 97, 181, 42, 200, 64, 10, 15, false);
+		AtlasSprite sprite = new AtlasSprite(region);
+		float width = sprite.getWidth();
+		float height = sprite.getHeight();
+		sprite.setSize(width * 3f, height * 4f);
+		assertThat(sprite.getWidth(), IsEqual.equalTo(width * 3f));
+		assertThat(sprite.getHeight(), IsEqual.equalTo(height * 4f));
+	}
 	
+	@Test
+	public void shouldSetSizeOfRotatedSpriteAtlas() {
+		AtlasRegion region = AtlasRegionFactory.atlasRegion(texture128x512, 2, 97, 42, 181, 200, 64, 10, 15, true);
+		AtlasSprite sprite = new AtlasSprite(region);
+		float width = sprite.getWidth();
+		float height = sprite.getHeight();
+		sprite.setSize(width * 3f, height * 4f);
+		assertThat(sprite.getWidth(), IsEqual.equalTo(width * 3f));
+		assertThat(sprite.getHeight(), IsEqual.equalTo(height * 4f));
+	}
+
 }
