@@ -13,7 +13,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasSprite;
 import com.badlogic.gdx.math.Rectangle;
 
-public class SpriteAtlasTest {
+public class AtlasSpriteTest {
 
 	private Texture texture128x512;
 
@@ -152,7 +152,7 @@ public class SpriteAtlasTest {
 		assertThat(sprite.getWidth(), IsEqual.equalTo(width * 3f));
 		assertThat(sprite.getHeight(), IsEqual.equalTo(height * 4f));
 	}
-	
+
 	@Test
 	public void shouldSetSizeOfRotatedSpriteAtlas() {
 		AtlasRegion region = AtlasRegionFactory.atlasRegion(texture128x512, 2, 97, 42, 181, 200, 64, 10, 15, true);
@@ -162,6 +162,41 @@ public class SpriteAtlasTest {
 		sprite.setSize(width * 3f, height * 4f);
 		assertThat(sprite.getWidth(), IsEqual.equalTo(width * 3f));
 		assertThat(sprite.getHeight(), IsEqual.equalTo(height * 4f));
+	}
+
+	// @Test
+	// public void testRotate90() {
+	// AtlasRegion region = AtlasRegionFactory.atlasRegion(texture128x512, 2, 97, 42, 181, 200, 64, 10, 15, true);
+	// AtlasSprite sprite = new AtlasSprite(region);
+	// float width = sprite.getWidth();
+	// float height = sprite.getHeight();
+	// sprite.rotate90(true);
+	// AtlasRegion atlasRegion = sprite.getAtlasRegion();
+	// assertThat(sprite.getWidth(), IsEqual.equalTo(width));
+	// assertThat(sprite.getHeight(), IsEqual.equalTo(height));
+	// assertThat(atlasRegion.offsetX, IsEqual.equalTo(200f - 181f - 15f));
+	// assertThat(atlasRegion.offsetY, IsEqual.equalTo(64 - 42f - 10f));
+	// // assertThat(region.offsetX, IsEqual.equalTo(widthTotal - offsetY - packedHeight));
+	// }
+
+	@Test
+	public void bugBoundingRectangleShouldChangeScaledWhenFlippingHorizontallyAndScaled() {
+		AtlasRegion region = AtlasRegionFactory.atlasRegion(texture128x512, 2, 97, 181, 42, 200, 64, 10, 15, false);
+		AtlasSprite sprite = new AtlasSprite(region);
+		sprite.setPosition(50f, 70f);
+		sprite.setSize(100f, 32f);
+		sprite.flip(true, false);
+		assertThat(sprite.getBoundingRectangle(), RectangleMatcher.isEqualRectangle(new Rectangle(50 + 100 - 90.5f - 5f, 70f + 7.5f, 90.5f, 21f)));
+	}
+
+	@Test
+	public void bugBoundingRectangleShouldChangeScaledWhenFlippingVerticallyAndScaled() {
+		AtlasRegion region = AtlasRegionFactory.atlasRegion(texture128x512, 2, 97, 181, 42, 200, 64, 10, 15, false);
+		AtlasSprite sprite = new AtlasSprite(region);
+		sprite.setPosition(50f, 70f);
+		sprite.setSize(100f, 32f);
+		sprite.flip(false, true);
+		assertThat(sprite.getBoundingRectangle(), RectangleMatcher.isEqualRectangle(new Rectangle(50 + 5f, 70f + 32f - 21f - 7.5f, 90.5f, 21f)));
 	}
 
 }
