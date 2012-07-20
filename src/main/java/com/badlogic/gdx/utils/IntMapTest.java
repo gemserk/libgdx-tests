@@ -2,6 +2,8 @@ package com.badlogic.gdx.utils;
 
 import java.util.Random;
 
+import com.badlogic.gdx.math.MathUtils;
+
 public class IntMapTest {
 
 	public static class Tuple {
@@ -19,14 +21,14 @@ public class IntMapTest {
 		int freeKey = 0;
 
 		long seed = 8686956005147532L;
-		Random random = new Random(seed);
+		MathUtils.random = new Random(seed);
 
 		for (int i = 0; i < 1000000000; i++) {
 			try {
 				if (i % 1000000 == 0)
 					System.out.println("Processing iteration " + i);
 
-				float f = random.nextFloat();
+				float f = MathUtils.random.nextFloat();
 
 				if (f > 0.6f) {
 
@@ -47,7 +49,7 @@ public class IntMapTest {
 					if (map.size <= 0)
 						continue;
 
-					int index = random.nextInt(addedObjects.size);
+					int index = MathUtils.random.nextInt(addedObjects.size);
 
 					Tuple tupleToRemove = addedObjects.removeIndex(index);
 					Object removedValue = map.remove(tupleToRemove.key);
@@ -63,7 +65,7 @@ public class IntMapTest {
 					if (map.size <= 0)
 						continue;
 
-					int index = random.nextInt(addedObjects.size);
+					int index = MathUtils.random.nextInt(addedObjects.size);
 
 					Tuple tupleToModify = addedObjects.get(index);
 					tupleToModify.value = new Object();
