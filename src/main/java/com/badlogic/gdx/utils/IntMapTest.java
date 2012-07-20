@@ -10,7 +10,7 @@ public class IntMapTest {
 	}
 
 	public static final int NOT_PRESENT = -1;
-
+	
 	public static void main(String[] args) throws Exception {
 
 		IntMap<Object> map = new IntMap<Object>();
@@ -18,7 +18,8 @@ public class IntMapTest {
 		Array<Tuple> addedObjects = new Array<Tuple>();
 		int freeKey = 0;
 
-		Random random = new Random(1234567L);
+		long seed = 8686956005147532L;
+		Random random = new Random(seed);
 
 		for (int i = 0; i < 1000000000; i++) {
 			try {

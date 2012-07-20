@@ -17,7 +17,8 @@ public class ObjectIntMapTest {
 		boolean comments = true;
 		Array<Tuple> addedObjects = new Array<Tuple>();
 
-		Random random = new Random(1234567L);
+		long seed = 8686956005147532L;
+		Random random = new Random(seed);
 
 		for (int i = 0; i < 1000000000; i++) {
 			try {
