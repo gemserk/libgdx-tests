@@ -2,10 +2,12 @@ package com.badlogic.gdx.utils;
 
 import java.util.Random;
 
+import com.badlogic.gdx.math.MathUtils;
+
 public class ObjectIntMapTest {
 
 	public static class Tuple {
-		public Object key;
+		public Integer key;
 		public int value;
 	}
 
@@ -18,21 +20,22 @@ public class ObjectIntMapTest {
 		Array<Tuple> addedObjects = new Array<Tuple>();
 
 		long seed = 8686956005147532L;
-		Random random = new Random(seed);
-
+		MathUtils.random = new Random(seed);
+		int freeKey = 1;
 		for (int i = 0; i < 1000000000; i++) {
 			try {
 				if (i % 1000000 == 0)
 					System.out.println("Processing iteration " + i);
 
 				// float f = MathUtils.random();
-				float f = random.nextFloat();
+				float f = MathUtils.random.nextFloat();
 
 				if (f > 0.6f) {
 
 					Tuple tuple = new Tuple();
-					tuple.key = new Object();
-					tuple.value = random.nextInt(10000);
+					tuple.key = new Integer(freeKey);
+					freeKey++;
+					tuple.value = MathUtils.random.nextInt(10000);
 					addedObjects.add(tuple);
 					map.put(tuple.key, tuple.value);
 					int obtainedValue = map.get(tuple.key, NOT_PRESENT);
@@ -47,7 +50,7 @@ public class ObjectIntMapTest {
 						continue;
 
 					// int index = MathUtils.random(0, addedObjects.size - 1);
-					int index = random.nextInt(addedObjects.size);
+					int index = MathUtils.random.nextInt(addedObjects.size);
 
 					Tuple tupleToRemove = addedObjects.removeIndex(index);
 					int removedValue = map.remove(tupleToRemove.key, NOT_PRESENT);
@@ -64,10 +67,10 @@ public class ObjectIntMapTest {
 						continue;
 
 					// int index = MathUtils.random(0, addedObjects.size - 1);
-					int index = random.nextInt(addedObjects.size);
+					int index = MathUtils.random.nextInt(addedObjects.size);
 
 					Tuple tupleToModify = addedObjects.get(index);
-					tupleToModify.value = random.nextInt(10000);
+					tupleToModify.value = MathUtils.random.nextInt(10000);
 					map.put(tupleToModify.key, tupleToModify.value);
 					int obtainedValue = map.get(tupleToModify.key, NOT_PRESENT);
 					if (obtainedValue != tupleToModify.value) {
