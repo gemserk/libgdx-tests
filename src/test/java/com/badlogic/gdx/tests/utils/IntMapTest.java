@@ -38,5 +38,22 @@ public class IntMapTest {
 		intMap.put(keys[3], new Object());
 		assertThat(intMap.size, IsEqual.equalTo(keys.length));
 	}
+	
+	@Test
+	public void bugWhenStashContainsKeyWithRemove() {
+		IntMap<Object> intMap = new IntMap<Object>();
+
+		MathUtils.random = new Random(10);
+		
+		int[] keys = {30314, 71946, 113578, 155210};
+
+		for (int i = 0; i < keys.length; i++) 
+			intMap.put(keys[i], new Object());
+		
+		intMap.remove(keys[0]);
+		
+		intMap.put(keys[3], new Object());
+		assertThat(intMap.size, IsEqual.equalTo(keys.length - 1));
+	}
 
 }
