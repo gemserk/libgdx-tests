@@ -40,7 +40,7 @@ public class TextureRegionTest {
 	public void testAllGetValuesWhenFlippedHorizontally() {
 		TextureRegion textureRegion = new TextureRegion(texture128x512, 10, 15, 30, 45);
 		textureRegion.flip(true, false);
-		assertThat(textureRegion.getRegionWidth(), IsEqual.equalTo(-30));
+		assertThat(textureRegion.getRegionWidth(), IsEqual.equalTo(30));
 		assertThat(textureRegion.getRegionHeight(), IsEqual.equalTo(45));
 		assertThat(textureRegion.getRegionX(), IsEqual.equalTo(40));
 		assertThat(textureRegion.getRegionY(), IsEqual.equalTo(15));
@@ -55,7 +55,7 @@ public class TextureRegionTest {
 		TextureRegion textureRegion = new TextureRegion(texture128x512, 10, 15, 30, 45);
 		textureRegion.flip(false, true);
 		assertThat(textureRegion.getRegionWidth(), IsEqual.equalTo(30));
-		assertThat(textureRegion.getRegionHeight(), IsEqual.equalTo(-45));
+		assertThat(textureRegion.getRegionHeight(), IsEqual.equalTo(45));
 		assertThat(textureRegion.getRegionX(), IsEqual.equalTo(10));
 		assertThat(textureRegion.getRegionY(), IsEqual.equalTo(60));
 		assertThat(textureRegion.getU(), IsEqual.equalTo(10f / 128f));
