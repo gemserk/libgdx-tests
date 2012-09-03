@@ -34,8 +34,8 @@ public class AtlasRegionTest {
 		assertThat(atlasRegion.getV(), IsEqual.equalTo(15f / 512f));
 		assertThat(atlasRegion.getU2(), IsEqual.equalTo(40f / 128f));
 		assertThat(atlasRegion.getV2(), IsEqual.equalTo(60f / 512f));
-		assertThat(atlasRegion.offsetX, IsEqual.equalTo(10f));
-		assertThat(atlasRegion.offsetY, IsEqual.equalTo(15f));
+		assertThat(atlasRegion.offsetX, IsEqual.equalTo(10));
+		assertThat(atlasRegion.offsetY, IsEqual.equalTo(15));
 	}
 
 	@Test
@@ -50,8 +50,8 @@ public class AtlasRegionTest {
 		assertThat(atlasRegion.getV(), IsEqual.equalTo(15f / 512f));
 		assertThat(atlasRegion.getU2(), IsEqual.equalTo(10f / 128f));
 		assertThat(atlasRegion.getV2(), IsEqual.equalTo(60f / 512f));
-		assertThat(atlasRegion.offsetX, IsEqual.equalTo(-10f));
-		assertThat(atlasRegion.offsetY, IsEqual.equalTo(15f));
+		assertThat(atlasRegion.offsetX, IsEqual.equalTo(-10));
+		assertThat(atlasRegion.offsetY, IsEqual.equalTo(15));
 	}
 	
 	@Test
@@ -66,19 +66,19 @@ public class AtlasRegionTest {
 		assertThat(atlasRegion.getV(), IsEqual.equalTo(60f / 512f));
 		assertThat(atlasRegion.getU2(), IsEqual.equalTo(40f / 128f));
 		assertThat(atlasRegion.getV2(), IsEqual.equalTo(15f / 512f));
-		assertThat(atlasRegion.offsetX, IsEqual.equalTo(10f));
-		assertThat(atlasRegion.offsetY, IsEqual.equalTo(-15f));
+		assertThat(atlasRegion.offsetX, IsEqual.equalTo(10));
+		assertThat(atlasRegion.offsetY, IsEqual.equalTo(-15));
 	}
 	
 	@Test
 	public void shouldAllowMultipleFlips() {
 		AtlasRegion atlasRegion = AtlasRegionFactory.atlasRegion(texture128x512, 10, 15, 30, 45, 30, 45, 10, 15);
 		atlasRegion.flip(true, false);
-		assertThat(atlasRegion.offsetX, IsEqual.equalTo(-10f));
+		assertThat(atlasRegion.offsetX, IsEqual.equalTo(-10));
 		atlasRegion.flip(true, false);
-		assertThat(atlasRegion.offsetX, IsEqual.equalTo(10f));
+		assertThat(atlasRegion.offsetX, IsEqual.equalTo(10));
 		atlasRegion.flip(true, false);
-		assertThat(atlasRegion.offsetX, IsEqual.equalTo(-10f));
+		assertThat(atlasRegion.offsetX, IsEqual.equalTo(-10));
 	}
 	
 	
