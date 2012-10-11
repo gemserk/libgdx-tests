@@ -199,4 +199,37 @@ public class AtlasSpriteTest {
 		assertThat(sprite.getBoundingRectangle(), RectangleMatcher.isEqualRectangle(new Rectangle(50 + 5f, 70f + 32f - 21f - 7.5f, 90.5f, 21f)));
 	}
 
+	@Test
+	public void bugWhenFlippingARotatedAtlasSprite() {
+		AtlasRegion region = AtlasRegionFactory.atlasRegion(texture128x512, 0, 0, 200, 64, 200, 64, 0, 0, true);
+		
+		region.packedWidth = 64;
+		region.packedHeight = 200;
+		
+		AtlasSprite sprite = new AtlasSprite(region);
+		sprite.setPosition(100f, 300f);
+		
+		Rectangle bounds = new Rectangle(100, 300, 64, 200);
+		assertThat(sprite.getBoundingRectangle(), RectangleMatcher.isEqualRectangle(bounds));
+		sprite.flip(false, true);
+		sprite.setPosition(100f, 300f);
+		assertThat(sprite.getBoundingRectangle(), RectangleMatcher.isEqualRectangle(bounds));
+	}
+	
+	@Test
+	public void bugWhenFloppingARotatedAtlasSprite() {
+		AtlasRegion region = AtlasRegionFactory.atlasRegion(texture128x512, 0, 0, 200, 64, 200, 64, 0, 0, true);
+		
+		region.packedWidth = 64;
+		region.packedHeight = 200;
+		
+		AtlasSprite sprite = new AtlasSprite(region);
+		sprite.setPosition(100f, 300f);
+		
+		Rectangle bounds = new Rectangle(100, 300, 64, 200);
+		assertThat(sprite.getBoundingRectangle(), RectangleMatcher.isEqualRectangle(bounds));
+		sprite.flip(true, false);
+		assertThat(sprite.getBoundingRectangle(), RectangleMatcher.isEqualRectangle(bounds));
+	}
+
 }
